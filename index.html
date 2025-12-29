@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>24-Hour Assistant Setup | Instant Replies, You Stay in Control</title>
+  <meta name="description" content="I help service providers save hours every week by setting up a 24-hour assistant that drafts fast, professional customer replies on demand—so you’re never starting from scratch." />
+  <style>
+    :root{
+      --bg:#070A12;
+      --card:#0C1224;
+      --card2:#0A1020;
+      --text:#EAF0FF;
+      --muted:rgba(234,240,255,.72);
+      --line:rgba(234,240,255,.12);
+      --glow:rgba(120, 180, 255, .25);
+      --accent:#7AB6FF;
+      --accent2:#A78BFA;
+      --good:#34D399;
+      --warn:#FBBF24;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 650px at 20% -10%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(1200px 650px at 80% -10%, rgba(122,182,255,.18), transparent 55%),
+        radial-gradient(900px 500px at 50% 110%, rgba(52,211,153,.10), transparent 55%),
+        var(--bg);
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 80px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:12px 14px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,18,36,.75), rgba(12,18,36,.35));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position: sticky; top: 12px; z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; text-decoration:none;
+      font-weight:650; letter-spacing:.2px;
+    }
+    .dot{
+      width:12px; height:12px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent2));
+      box-shadow: 0 0 24px var(--glow);
+    }
+    .navlinks{display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end}
+    .navlinks a{
+      text-decoration:none; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+    }
+    .navlinks a:hover{border-color:var(--line); color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px; padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(122,182,255,.35);
+      background: linear-gradient(180deg, rgba(122,182,255,.18), rgba(12,18,36,.35));
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+      text-decoration:none;
+      font-weight:650;
+      cursor:pointer;
+    }
+    .btn:hover{border-color: rgba(122,182,255,.55)}
+    .btn.secondary{
+      border-color: rgba(234,240,255,.18);
+      background: linear-gradient(180deg, rgba(234,240,255,.08), rgba(12,18,36,.30));
+      font-weight:600;
+      color:var(--muted);
+    }
+    .hero{
+      padding:44px 8px 10px;
+      display:grid; grid-template-columns: 1.25fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr; padding-top:26px}
+      .nav{position:relative; top:auto}
+    }
+    .hcard{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,18,36,.65), rgba(10,16,32,.45));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hcard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 300px at 15% 0%, rgba(122,182,255,.18), transparent 65%);
+      pointer-events:none;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color:var(--muted);
+      letter-spacing:.3px;
+      font-weight:600;
+      margin-bottom:12px;
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(122,182,255,.28);
+      background: rgba(122,182,255,.10);
+      color: rgba(234,240,255,.85);
+    }
+    h1{
+      margin:0 0 12px;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      margin:0 0 18px;
+      max-width: 62ch;
+    }
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px}
+    .mini{
+      margin-top:18px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .mini span{
+      border:1px solid var(--line);
+      padding:8px 10px; border-radius:12px;
+      background: rgba(10,16,32,.35);
+    }
+
+    .side{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,18,36,.55), rgba(10,16,32,.45));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .video{
+      border:1px solid rgba(234,240,255,.14);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      aspect-ratio: 16/9;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .video small{color:var(--muted)}
+    .play{
+      width:64px; height:64px; border-radius:999px;
+      border:1px solid rgba(122,182,255,.40);
+      background: radial-gradient(circle at 30% 30%, rgba(122,182,255,.30), rgba(12,18,36,.70));
+      display:grid; place-items:center;
+      box-shadow: 0 0 40px rgba(122,182,255,.15);
+    }
+    .play:before{
+      content:"";
+      display:block;
+      width:0; height:0;
+      border-left: 14px solid rgba(234,240,255,.9);
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      margin-left: 3px;
+    }
+    .side .box{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:14px;
+      background: rgba(10,16,32,.35);
+    }
+    .box h3{margin:0 0 6px; font-size:14px; letter-spacing:.2px}
+    .box p{margin:0; color:var(--muted); font-size:13px; line-height:1.5}
+
+    section{margin-top:22px}
+    .grid3{
+      display:grid; grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 920px){
+      .grid3{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,18,36,.55), rgba(10,16,32,.40));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .card h2{margin:0 0 8px; font-size:18px; letter-spacing:-.2px}
+    .card p{margin:0; color:var(--muted); line-height:1.6}
+    .list{
+      margin:10px 0 0; padding:0; list-style:none;
+      color:var(--muted);
+    }
+    .list li{
+      padding:10px 0;
+      border-top:1px solid rgba(234,240,255,.08);
+    }
+    .list li:first-child{border-top:none}
+    .priceWrap{
+      display:grid; grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width: 920px){ .priceWrap{grid-template-columns:1fr} }
+    .price{
+      position:relative;
+      overflow:hidden;
+    }
+    .price .tag{
+      position:absolute;
+      top:14px; right:14px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(52,211,153,.25);
+      background: rgba(52,211,153,.10);
+      color: rgba(234,240,255,.90);
+    }
+    .amt{
+      font-size:34px; font-weight:750; letter-spacing:-.8px; margin:8px 0 2px;
+    }
+    .per{color:var(--muted); font-size:13px}
+    .divider{height:1px; background: rgba(234,240,255,.10); margin:14px 0}
+    .faq details{
+      border:1px solid var(--line);
+      background: rgba(10,16,32,.35);
+      border-radius: 16px;
+      padding:14px;
+      margin:10px 0;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:650;
+      letter-spacing:.1px;
+    }
+    .faq p{color:var(--muted); margin:10px 0 0; line-height:1.6}
+    form{
+      display:grid; gap:10px;
+      margin-top: 12px;
+    }
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(234,240,255,.14);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(122,182,255,.45);
+      box-shadow: 0 0 0 4px rgba(122,182,255,.12);
+    }
+    textarea{min-height: 110px; resize: vertical}
+    .footer{
+      margin-top: 26px;
+      color: rgba(234,240,255,.55);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .note{color: rgba(234,240,255,.60); font-size:13px; line-height:1.5}
+    .ok{color: rgba(52,211,153,.95); font-weight:650}
+    /* Bright multi-color emphasis for “anytime, day, or night” */
+.timeAccent{
+  white-space: nowrap; /* keeps the phrase together */
+}
+
+.tAny, .tDay, .tNight{
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.12),
+    0 0 26px rgba(122,182,255,.18);
+}
+
+/* Bright colors */
+.tAny{
+  color: #00E5FF; /* neon cyan */
+  text-shadow:
+    0 0 10px rgba(0,229,255,.35),
+    0 0 28px rgba(0,229,255,.22);
+}
+.tDay{
+  color: #A3FF12; /* neon lime */
+  text-shadow:
+    0 0 10px rgba(163,255,18,.30),
+    0 0 28px rgba(163,255,18,.18);
+}
+.tNight{
+  color: #FF2ED1; /* neon magenta */
+  text-shadow:
+    0 0 10px rgba(255,46,209,.30),
+    0 0 28px rgba(255,46,209,.20);
+}
+
+/* Optional: keep “or” readable but still styled */
+.tOr{
+  color: rgba(234,240,255,.85);
+  font-weight: 700;
+  padding: 0 2px;
+}
+    .video-embed{
+  border:1px solid rgba(234,240,255,.14);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: rgba(0,0,0,.25);
+  aspect-ratio: 16/9;
+  position: relative;
+}
+
+.video-embed iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.tlist{
+  margin:10px 0 0;
+  padding:0;
+  list-style:none;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+
+.tlist li{
+  padding:10px 0;
+  border-top:1px solid rgba(234,240,255,.08);
+}
+
+.tlist li:first-child{border-top:none}
+
+.box.trust{
+  border-color: rgba(122,182,255,.22);
+  background: radial-gradient(600px 220px at 0% 0%, rgba(122,182,255,.12), rgba(10,16,32,.35));
+}
+
+.box.safety{
+  border-color: rgba(52,211,153,.22);
+  background: radial-gradient(600px 220px at 0% 0%, rgba(52,211,153,.10), rgba(10,16,32,.35));
+}
+    /* Make pricing cards feel wider + simpler */
+.priceWrap{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.price{
+  padding: 18px;
+}
+
+.price .btn{
+  width: 100%;
+}
+
+/* Prevent the "Recommended" badge from colliding */
+.price{ padding-top: 46px; }
+
+.price .tag{
+  left: 14px;
+  right: auto;
+}
+.faq{
+  columns: 2;
+  column-gap: 12px;
+}
+
+.faq details{
+  break-inside: avoid;
+}
+
+@media (max-width: 920px){
+  .faq{ columns: 1; }
+}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="#top">
+        <span class="dot"></span>
+        <span>24-Hour Assistant</span>
+      </a>
+      <div class="navlinks">
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn" href="#contact">Get set up</a>
+      </div>
+    </div>
+    <div id="top" class="hero">
+      <div class="hcard">
+        <div class="kicker">
+          <span class="pill">For Service Providers</span>
+          <span class="pill">Customer replies • Follow-ups • Boundaries</span>
+        </div>
+        
+        <h1>
+  Turn customer questions into ready-to-send replies in minutes—
+  <span class="timeAccent">
+    <span class="tAny">anytime</span>, 
+    <span class="tDay">day</span> 
+    <span class="tOr">or</span> 
+    <span class="tNight">night</span>
+  </span>.
+</h1>
+
+        <p class="sub">
+          Most service providers lose hours every week answering the same questions—pricing, services, availability, and follow-ups.
+          I set up a customized <strong>24-hour Assistant</strong> that drafts fast, professional replies in your voice the moment you need it,
+          so you’re never starting from scratch.
+          <strong>You stay in control:</strong> nothing is sent automatically—your approval comes first.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn" href="#contact">Get set up</a>
+          <a class="btn secondary" href="https://www.youtube.com/watch?v=mmzYQkDodQA">Watch the 60-second demo</a>
+        </div>
+
+        <div class="mini">
+          <span><span class="ok">Always available:</span> draft replies on demand</span>
+          <span><span class="ok">No automation risk:</span> you approve every message</span>
+          <span><span class="ok">Fast setup:</span> 7–14 days</span>
+        </div>
+      </div>
+   
+     <div class="side">
+  <div class="video-embed">
+    <iframe
+      src="https://www.youtube.com/embed/mmzYQkDodQA"
+      title="60-second demo"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="box trust">
+    <h3>Set up by Saint (not a random app)</h3>
+    <p>
+      I’m Saint. I set up your 24-hour Assistant to draft replies the way you talk—based on your services, pricing, FAQs, and boundaries.
+      <strong>You stay in control:</strong> nothing sends automatically. You review, approve, and send.
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>What you’ll receive</h3>
+    <ul class="tlist">
+      <li><strong>Custom assistant setup</strong> aligned to your services + tone</li>
+      <li><strong>Reply templates</strong> for pricing, availability, and follow-ups</li>
+      <li><strong>Boundaries</strong> (deposits, cancellations, refunds, turnaround time)</li>
+      <li><strong>1-page operating guide</strong> so it’s easy to use</li>
+      <li><strong>Quick walkthrough</strong> so you’re confident from day one</li>
+    </ul>
+  </div>
+
+  <div class="box safety">
+    <h3>You stay in control</h3>
+    <p>
+      This drafts messages. It does not auto-send. You approve every reply before it goes out.
+    </p>
+  </div>
+</div>
+
+   <section id="pricing" class="card">
+  <h2>Pricing</h2>
+  <p class="note">Start simple. Upgrade only if you want ongoing tuning so your 24-hour assistant keeps improving as your business evolves.</p>
+
+  <div class="priceWrap">
+      <div class="card price">
+          <h2>Setup Only</h2>
+          <div class="amt">$297</div>
+          <div class="per">one-time</div>
+          <div class="divider"></div>
+          <ul class="list">
+            <li>24-hour assistant configured to your business</li>
+            <li>Customer message drafting workflow</li>
+            <li>Boundaries + simple operating guide</li>
+            <li>Short walkthrough</li>
+          </ul>
+          <div class="ctaRow" style="margin-top:14px;">
+            <a class="btn" href="#contact">Start setup</a>
+          </div>
+        </div>
+
+        <div class="card price">
+          <span class="tag">Recommended</span>
+          <h2>Setup + Support</h2>
+          <div class="amt">$297</div>
+          <div class="per">setup + $49/month</div>
+          <div class="divider"></div>
+          <ul class="list">
+            <li>Everything in Setup Only</li>
+            <li>Monthly tuning + refinement</li>
+            <li>Voice improvements over time</li>
+            <li>Light updates as your offers change</li>
+          </ul>
+          <div class="ctaRow" style="margin-top:14px;">
+            <a class="btn" href="#contact">Start setup</a>
+          </div>
+        </div>
+
+        <div class="card price">
+          <h2>Done-With-You Growth</h2>
+          <div class="amt">$497</div>
+          <div class="per">setup + $79/month</div>
+          <div class="divider"></div>
+          <ul class="list">
+            <li>Everything in Setup + Support</li>
+            <li>Priority optimization</li>
+            <li>Monthly workflow upgrades</li>
+            <li>More proactive guidance</li>
+          </ul>
+          <div class="ctaRow" style="margin-top:14px;">
+            <a class="btn" href="#contact">Start setup</a>
+          </div>
+  </div>
+</section>
+
+<section id="faq" class="card faq">
+  <h2>FAQ</h2>
+
+  <details>
+    <summary>Is this automatic?</summary>
+    <p>No. Your 24-hour assistant drafts replies, but nothing goes out without your approval. It removes the blank page—your judgment stays in control.</p>
+  </details>
+
+  <details>
+    <summary>So what makes it “24-hour”?</summary>
+    <p>It’s available whenever you are. If a customer messages you at night, early morning, or during a busy shift, you can open it and get a strong draft reply in seconds.</p>
+  </details>
+
+  <details>
+    <summary>Will it sound robotic?</summary>
+    <p>Not if it’s set up correctly. I tailor it to your tone and keep replies short, clear, and human—so it reads like you wrote it.</p>
+  </details>
+
+  <details>
+    <summary>What about privacy?</summary>
+    <p>I set boundaries and show you what not to use it for. We keep it focused on customer messaging and safe admin tasks.</p>
+  </details>
+
+  <details>
+    <summary>How long does setup take?</summary>
+    <p>Typically 7–14 days depending on how quickly we get your business details and finalize your voice.</p>
+  </details>
+</section>
+
+      <h2>Get set up today→</h2>
+      
+      <form action="https://formspree.io/f/xvzobryp" method="post" enctype="text/plain">
+        <input name="Business Name" placeholder="Business name" required />
+        <input name="Contact Name" placeholder="Your name" required />
+        <input name="Email" type="email" placeholder="Email address" required />
+        <input name="Phone" placeholder="Phone number (optional)" />
+
+        <select name="Business Type" required>
+          <option value="" disabled selected>Business type</option>
+          <option>Cleaner</option>
+          <option>Contractor / Handyman</option>
+          <option>Auto Detailer</option>
+          <option>Barber / Salon</option>
+          <option>Landscaper</option>
+          <option>Dance Studio</option>
+          <option>Tattoo Artist</option>
+          <option>Consulting / Coaching</option>
+          <option>Photography / Videography</option>
+          <option>Real Estate Agent</option>
+          <option>Roofer</option>
+          <option>Electrician</option>
+          <option>Plumber</option>
+          <option>HVAC Technician</option>
+          <option>Other</option>
+        </select>
+
+        <textarea name="Most Common Customer Questions" placeholder="Provided all details you'd like for your assistant or any questions you have regarding our services. (pricing, availability, services, etc.)"></textarea>
+        <select name="Preferred Plan" required>
+          <option value="" disabled selected>Preferred plan</option>
+          <option>Setup Only ($297)</option>
+          <option>Setup + Support ($297 + $49/mo)</option>
+          <option>Done-With-You Growth ($497 + $79/mo)</option>
+        </select>
+
+        <button class="btn" type="submit">Send request</button>
+        <p class="note">Read:<strong></strong>
+Submit this form and I’ll follow up with next steps and a short walkthrough schedule. You will get an email back within 24 hours.</p>
+      </form>
+    </section>
+
+    <div class="footer">
+      <div><a href="#top" style="color:rgba(234,240,255,.7); text-decoration:none;">Back to top</a></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
